@@ -21,20 +21,6 @@ public class Main {
             countryList.add(jsonb.fromJson(country, Country.class));
         }
 
-        List<Country> market1List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3));
-        List<Country> market2List = List.of(countryList.get(0), countryList.get(2), countryList.get(3), countryList.get(4));
-        List<Country> market3List = List.of(countryList.get(0), countryList.get(1), countryList.get(3), countryList.get(4));
-        List<Country> market4List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(4));
-        List<Country> market5List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3));
-        List<Country> market6List = List.of(countryList.get(5));
-
-        Market market1 = new Market("Market1", market1List);
-        Market market2 = new Market("Market2", market2List);
-        Market market3 = new Market("Market3", market3List);
-        Market market4 = new Market("Market4", market4List);
-        Market market5 = new Market("Market5", market5List);
-        Market market6 = new Market("Market6", market6List);
-
         Path marketFilePath = Paths.get("src/main/resources/market");
         List<String> marketListFromFile = Files.readAllLines(marketFilePath);
         List<Market> marketList = new ArrayList<>();
@@ -87,8 +73,6 @@ public class Main {
 
         System.out.println(Car.searchCars(carsList));
         Car.printer(Car.searchCars(carsList));
-
-
 
     }
 

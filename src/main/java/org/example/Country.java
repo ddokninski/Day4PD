@@ -2,14 +2,15 @@ package org.example;
 
 public class Country {
 
-    String countryName;
+    private String countryName;
 
-    char countrySign;
+    private char countrySign;
 
     public Country(String countryName, char countrySign) {
         this.countryName = countryName;
         this.countrySign = countrySign;
     }
+
     public Country() {
     }
 

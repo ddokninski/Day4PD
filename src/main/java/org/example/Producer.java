@@ -1,8 +1,8 @@
 package org.example;
 
 public class Producer {
-    String model;
-    String type;
+    private String model;
+    private String type;
 
     public Producer(String model, String type) {
         this.model = model;

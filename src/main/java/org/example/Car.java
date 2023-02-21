@@ -6,11 +6,11 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class Car {
-    protected Producer producer;
-    protected boolean isAutomaticGearBox;
-    protected Market market;
-    protected String segment;
-    protected List<Dimension> dimensionList;
+    private Producer producer;
+    private boolean isAutomaticGearBox;
+    private Market market;
+    private String segment;
+    private List<Dimension> dimensionList;
 
     public Car(Producer producer, boolean isAutomaticGearBox, Market market, String segment, List<Dimension> dimensionList) {
         this.producer = producer;
@@ -191,16 +191,11 @@ public class Car {
         carsList = !minTrunkCapacity.isEmpty() ? minTrunkCapacityChecker(carsList, Integer.parseInt(minTrunkCapacity)) : carsList;
         carsList = !model.isEmpty() ? modelChecker(carsList, model) : carsList;
         carsList = !type.isEmpty() ? typeChecker(carsList, type) : carsList;
+        carsList = !segment.isEmpty() ? segmentChecker(carsList, segment) : carsList;
 
         if (!isAutomaticGearBox.isEmpty()) {
-            if ("true".equals(isAutomaticGearBox)) {
-                carsList = gearBoxChecker(carsList, true);
-            } else {
-                carsList = gearBoxChecker(carsList, false);
-            }
+            carsList = "true".equals(isAutomaticGearBox) ? gearBoxChecker(carsList, true) : gearBoxChecker(carsList, false);
         }
-
-        carsList = !segment.isEmpty() ? segmentChecker(carsList, segment) : carsList;
 
         return carsList;
     }
