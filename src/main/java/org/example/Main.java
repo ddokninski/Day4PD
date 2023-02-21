@@ -1,26 +1,32 @@
 package org.example;
 
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Hello world!");
+        Jsonb jsonb = JsonbBuilder.create();
 
-        Country poland = new Country("Poland", 'P');
-        Country germany = new Country("Germany", 'D');
-        Country italy = new Country("Italy", 'I');
-        Country korea = new Country("Korea", 'K');
-        Country france = new Country("France", 'F');
-        Country china = new Country("China", 'C');
+        Path countryFilePath = Paths.get("src/main/resources/country");
+        List<String> countryListFromFile = Files.readAllLines(countryFilePath);
+        List<Country> countryList = new ArrayList<>();
+        for (String country : countryListFromFile) {
+            countryList.add(jsonb.fromJson(country, Country.class));
+        }
 
-        List<Country> market1List = List.of(poland, italy, korea, france);
-        List<Country> market2List = List.of(poland, germany, korea, france);
-        List<Country> market3List = List.of(poland, germany, italy, france);
-        List<Country> market4List = List.of(poland, germany, italy, korea);
-        List<Country> market5List = List.of(poland, germany, italy, korea, france);
-        List<Country> market6List = List.of(china);
+        List<Country> market1List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3));
+        List<Country> market2List = List.of(countryList.get(0), countryList.get(2), countryList.get(3), countryList.get(4));
+        List<Country> market3List = List.of(countryList.get(0), countryList.get(1), countryList.get(3), countryList.get(4));
+        List<Country> market4List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(4));
+        List<Country> market5List = List.of(countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3));
+        List<Country> market6List = List.of(countryList.get(5));
 
         Market market1 = new Market("Market1", market1List);
         Market market2 = new Market("Market2", market2List);
@@ -29,51 +35,55 @@ public class Main {
         Market market5 = new Market("Market5", market5List);
         Market market6 = new Market("Market6", market6List);
 
-        Dimension dimension1 = new Dimension(60, 160, 100);
-        Dimension dimension2 = new Dimension(70, 160, 200);
-        Dimension dimension3 = new Dimension(80, 160, 300);
-        Dimension dimension4 = new Dimension(90, 170, 400);
-        Dimension dimension5 = new Dimension(100, 170, 400);
-        Dimension dimension6 = new Dimension(110, 170, 400);
-        Dimension dimension7 = new Dimension(120, 180, 400);
-        Dimension dimension8 = new Dimension(130, 180, 500);
-        Dimension dimension9 = new Dimension(140, 180, 600);
-        Dimension dimension10 = new Dimension(150, 190, 700);
-        Dimension dimension11 = new Dimension(1500, 1500, 1500);
-        Dimension dimension12 = new Dimension(1000, 1000, 1000);
+        Path marketFilePath = Paths.get("src/main/resources/market");
+        List<String> marketListFromFile = Files.readAllLines(marketFilePath);
+        List<Market> marketList = new ArrayList<>();
+        for (String market : marketListFromFile) {
+            marketList.add(jsonb.fromJson(market, Market.class));
+        }
 
-        List<Dimension> dimensionList1 = List.of(dimension1, dimension2);
-        List<Dimension> dimensionList2 = List.of(dimension3, dimension4);
-        List<Dimension> dimensionList3 = List.of(dimension5, dimension6);
-        List<Dimension> dimensionList4 = List.of(dimension7, dimension8);
-        List<Dimension> dimensionList5 = List.of(dimension9, dimension10);
-        List<Dimension> dimensionList6 = List.of(dimension11, dimension12);
+        Path dimensionsFilePath = Paths.get("src/main/resources/dimensions");
+        List<String> dimensionsListFromFile = Files.readAllLines(dimensionsFilePath);
+        List<Dimension> dimensionList = new ArrayList<>();
+        for (String dimension : dimensionsListFromFile) {
+            dimensionList.add(jsonb.fromJson(dimension, Dimension.class));
+        }
 
-        Producer bmw = new Producer("BMW", "limousine");
-        Producer audi = new Producer("AUDI", "limousine");
-        Producer mercedes = new Producer("MERCEDES", "limousine");
-        Producer toyota = new Producer("TOYOTA", "SUV");
-        Producer vw = new Producer("VW", "SUV");
-        Producer skoda = new Producer("SKODA", "combi");
-        Producer mazda = new Producer("MAZDA", "cabrio");
-        Producer ford = new Producer("FORD", "hatchback");
-        Producer chrysler = new Producer("CHRYSLER", "van");
-        Producer porsche = new Producer("PORSCHE", "supercar");
-        Producer polonez = new Producer("POLONEZ", "supercar");
+        List<Dimension> dimensionList1 = List.of(dimensionList.get(0), dimensionList.get(1));
+        List<Dimension> dimensionList2 = List.of(dimensionList.get(2), dimensionList.get(3));
+        List<Dimension> dimensionList3 = List.of(dimensionList.get(4), dimensionList.get(5));
+        List<Dimension> dimensionList4 = List.of(dimensionList.get(6), dimensionList.get(7));
+        List<Dimension> dimensionList5 = List.of(dimensionList.get(8), dimensionList.get(9));
+        List<Dimension> dimensionList6 = List.of(dimensionList.get(10), dimensionList.get(11));
 
-        Car car1 = new Car(bmw, true, market1, "premium", dimensionList1);
-        Car car2 = new Car(audi, true, market2, "premium", dimensionList2);
-        Car car3 = new Car(mercedes, true, market3, "premium", dimensionList3);
-        Car car4 = new Car(toyota, true, market4, "medium", dimensionList4);
-        Car car5 = new Car(vw, true, market5, "medium", dimensionList5);
-        Car car6 = new Car(skoda, true, market1, "standard", dimensionList1);
-        Car car7 = new Car(mazda, true, market2, "standard", dimensionList2);
-        Car car8 = new Car(ford, true, market3, "standard", dimensionList3);
-        Car car9 = new Car(chrysler, true, market4, "standard", dimensionList4);
-        Car car10 = new Car(porsche, false, market5, "premium", dimensionList5);
-        Car car11 = new Car(polonez, false, market6, "standard", dimensionList6);
+        Path producerFilePath = Paths.get("src/main/resources/producer");
+        List<String> producerListFromFile = Files.readAllLines(producerFilePath);
+        List<Producer> producerList = new ArrayList<>();
+        for (String producer : producerListFromFile) {
+            producerList.add(jsonb.fromJson(producer, Producer.class));
+        }
 
-        List<Car> carsList = List.of(car1, car2, car3, car4, car5, car6, car7, car8, car9, car10, car11);
+        Car car1 = new Car(producerList.get(0), true, marketList.get(0), "premium", dimensionList1);
+        Car car2 = new Car(producerList.get(1), true, marketList.get(1), "premium", dimensionList2);
+        Car car3 = new Car(producerList.get(2), true, marketList.get(2), "premium", dimensionList3);
+        Car car4 = new Car(producerList.get(3), true, marketList.get(3), "medium", dimensionList4);
+        Car car5 = new Car(producerList.get(4), true, marketList.get(4), "medium", dimensionList5);
+        Car car6 = new Car(producerList.get(5), true, marketList.get(0), "standard", dimensionList1);
+        Car car7 = new Car(producerList.get(6), true, marketList.get(1), "standard", dimensionList2);
+        Car car8 = new Car(producerList.get(7), true, marketList.get(2), "standard", dimensionList3);
+        Car car9 = new Car(producerList.get(8), true, marketList.get(3), "standard", dimensionList4);
+        Car car10 = new Car(producerList.get(9), false, marketList.get(3), "premium", dimensionList5);
+        Car car11 = new Car(producerList.get(10), false, marketList.get(5), "standard", dimensionList6);
+        Car car12 = new Car(producerList.get(2), false, marketList.get(5), "standard", dimensionList6);
+        Car car13 = new Car(producerList.get(3), false, marketList.get(5), "standard", dimensionList6);
+        Car car14 = new Car(producerList.get(4), false, marketList.get(5), "standard", dimensionList6);
+        Car car15 = new Car(producerList.get(5), false, marketList.get(5), "standard", dimensionList6);
+
+        String s = jsonb.toJson(car1);
+        System.out.println(s);
+        System.out.println(producerList.size());
+
+        List<Car> carsList = List.of(car1, car2, car3, car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15);
 
         System.out.println(Car.searchCars(carsList));
         Car.printer(Car.searchCars(carsList));

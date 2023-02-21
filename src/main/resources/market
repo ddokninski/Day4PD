@@ -1,0 +1,6 @@
+{"countries":[{"countryName":"Poland","countrySign":"P"},{"countryName":"Germany","countrySign":"D"},{"countryName":"Italy","countrySign":"I"},{"countryName":"Korea","countrySign":"K"}],"name":"Market1"}
+{"countries":[{"countryName":"Poland","countrySign":"P"},{"countryName":"Italy","countrySign":"I"},{"countryName":"Korea","countrySign":"K"},{"countryName":"France","countrySign":"F"}],"name":"Market2"}
+{"countries":[{"countryName":"Poland","countrySign":"P"},{"countryName":"Germany","countrySign":"D"},{"countryName":"Korea","countrySign":"K"},{"countryName":"France","countrySign":"F"}],"name":"Market3"}
+{"countries":[{"countryName":"Poland","countrySign":"P"},{"countryName":"Germany","countrySign":"D"},{"countryName":"Italy","countrySign":"I"},{"countryName":"France","countrySign":"F"}],"name":"Market4"}
+{"countries":[{"countryName":"Poland","countrySign":"P"},{"countryName":"Germany","countrySign":"D"},{"countryName":"Italy","countrySign":"I"},{"countryName":"Korea","countrySign":"K"}],"name":"Market5"}
+{"countries":[{"countryName":"China","countrySign":"C"}],"name":"Market6"}

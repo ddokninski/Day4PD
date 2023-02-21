@@ -12,23 +12,54 @@ public class Car {
     protected String segment;
     protected List<Dimension> dimensionList;
 
+    public Car(Producer producer, boolean isAutomaticGearBox, Market market, String segment, List<Dimension> dimensionList) {
+        this.producer = producer;
+        this.isAutomaticGearBox = isAutomaticGearBox;
+        this.market = market;
+        this.segment = segment;
+        this.dimensionList = dimensionList;
+    }
+
+    public Car() {
+    }
+
     public Producer getProducer() {
         return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    public boolean isAutomaticGearBox() {
+        return isAutomaticGearBox;
+    }
+
+    public void setAutomaticGearBox(boolean automaticGearBox) {
+        isAutomaticGearBox = automaticGearBox;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
     }
 
     public String getSegment() {
         return segment;
     }
 
+    public void setSegment(String segment) {
+        this.segment = segment;
+    }
+
     public List<Dimension> getDimensionList() {
         return dimensionList;
     }
 
-    public Car(Producer producer, boolean isAutomaticGearBox, Market market, String segment, List<Dimension> dimensionList) {
-        this.producer = producer;
-        this.isAutomaticGearBox = isAutomaticGearBox;
-        this.market = market;
-        this.segment = segment;
+    public void setDimensionList(List<Dimension> dimensionList) {
         this.dimensionList = dimensionList;
     }
 
@@ -43,7 +74,6 @@ public class Car {
                 '}';
     }
 
-
     public static List<Car> gearBoxChecker(List<Car> carsList, boolean isAutomaticGearBox) {
         return carsList.stream()
                 .filter(car -> car.isAutomaticGearBox == isAutomaticGearBox)
@@ -52,13 +82,13 @@ public class Car {
 
     public static List<Car> modelChecker(List<Car> carList, String modelName) {
         return carList.stream()
-                .filter(car -> car.getProducer().model().equals(modelName))
+                .filter(car -> car.getProducer().getModel().equals(modelName))
                 .collect(Collectors.toList());
     }
 
     public static List<Car> typeChecker(List<Car> carList, String typeName) {
         return carList.stream()
-                .filter(car -> car.getProducer().type().equals(typeName))
+                .filter(car -> car.getProducer().getType().equals(typeName))
                 .collect(Collectors.toList());
     }
 
@@ -70,13 +100,13 @@ public class Car {
 
     public static List<Car> marketNameChecker(List<Car> carsList, String marketName) {
         return carsList.stream()
-                .filter(car -> car.market.name().equals(marketName))
+                .filter(car -> car.market.getName().equals(marketName))
                 .collect(Collectors.toList());
     }
 
     public boolean hasBiggerTrunkCapacityThan(int trunkCapacity) {
         return dimensionList.stream()
-                .anyMatch(dimension -> dimension.trunkCapacity() >= trunkCapacity);
+                .anyMatch(dimension -> dimension.getTrunkCapacity() >= trunkCapacity);
     }
 
     public static List<Car> minTrunkCapacityChecker(List<Car> carList, int trunkCapacity) {
@@ -87,7 +117,7 @@ public class Car {
 
     public boolean hasBiggerHighThan(int high) {
         return dimensionList.stream()
-                .anyMatch(dimension -> dimension.high() >= high);
+                .anyMatch(dimension -> dimension.getHigh() >= high);
     }
 
     public static List<Car> minHighChecker(List<Car> carList, int high) {
@@ -98,7 +128,7 @@ public class Car {
 
     public boolean hasBiggerWidthThan(int width) {
         return dimensionList.stream()
-                .anyMatch(dimension -> dimension.width() >= width);
+                .anyMatch(dimension -> dimension.getWidth() >= width);
     }
 
     public static List<Car> minWidthChecker(List<Car> carList, int width) {
@@ -108,8 +138,8 @@ public class Car {
     }
 
     public boolean hasCountryName (String countryName) {
-        return market.countries().stream()
-                .anyMatch(country -> country.countryName().equals(countryName));
+        return market.getCountries().stream()
+                .anyMatch(country -> country.getCountryName().equals(countryName));
     }
 
     public static List<Car> countryNameChecker (List<Car> carList, String countryName) {
@@ -119,8 +149,8 @@ public class Car {
     }
 
     public boolean hasCountrySign (String countrySign) {
-        return market.countries().stream()
-                .anyMatch(country -> String.valueOf(country.countrySign()).equals(countrySign));
+        return market.getCountries().stream()
+                .anyMatch(country -> String.valueOf(country.getCountrySign()).equals(countrySign));
     }
 
     public static List<Car> countrySignChecker (List<Car> carList, String countrySign) {
@@ -131,9 +161,9 @@ public class Car {
 
     public static void printer(List<Car> carsList) {
         for (Car car : carsList) {
-            for (int j = 0; j < car.market.countries().size(); j++) {
-                System.out.print(car.market.countries().get(j).countryName() + " - ");
-                System.out.println(car.market.countries().get(j).countrySign());
+            for (int j = 0; j < car.market.getCountries().size(); j++) {
+                System.out.print(car.market.getCountries().get(j).getCountryName() + " - ");
+                System.out.println(car.market.getCountries().get(j).getCountrySign());
             }
         }
     }
