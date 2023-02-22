@@ -13,16 +13,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Jsonb jsonb = JsonbBuilder.create();
-
         Path carsFilePath = Paths.get("src/main/resources/cars");
         List<String> carListFromFile = Files.readAllLines(carsFilePath);
         List<Car> carList = new ArrayList<>();
         for (String car : carListFromFile) {
             carList.add(jsonb.fromJson(car, Car.class));
         }
-
         Car.printer(Car.searchCars(carList));
     }
-
-
 }
