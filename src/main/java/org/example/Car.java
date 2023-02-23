@@ -137,33 +137,37 @@ public class Car {
                 .collect(Collectors.toList());
     }
 
-    public boolean hasCountryName (String countryName) {
+    public boolean hasCountryName(String countryName) {
         return market.getCountries().stream()
                 .anyMatch(country -> country.getCountryName().equals(countryName));
     }
 
-    public static List<Car> countryNameChecker (List<Car> carList, String countryName) {
+    public static List<Car> countryNameChecker(List<Car> carList, String countryName) {
         return carList.stream()
                 .filter(car -> car.hasCountryName(countryName))
                 .collect(Collectors.toList());
     }
 
-    public boolean hasCountrySign (String countrySign) {
+    public boolean hasCountrySign(String countrySign) {
         return market.getCountries().stream()
                 .anyMatch(country -> String.valueOf(country.getCountrySign()).equals(countrySign));
     }
 
-    public static List<Car> countrySignChecker (List<Car> carList, String countrySign) {
+    public static List<Car> countrySignChecker(List<Car> carList, String countrySign) {
         return carList.stream()
                 .filter(car -> car.hasCountrySign(countrySign))
                 .collect(Collectors.toList());
     }
 
     public static void printer(List<Car> carsList) {
-        for (Car car : carsList) {
-            for (int j = 0; j < car.market.getCountries().size(); j++) {
-                System.out.print(car.market.getCountries().get(j).getCountryName() + " - ");
-                System.out.println(car.market.getCountries().get(j).getCountrySign());
+        if (carsList.size() < 1) {
+            System.out.println("There is no cars with chosen parameters");
+        } else {
+            for (Car car : carsList) {
+                for (int j = 0; j < car.market.getCountries().size(); j++) {
+                    System.out.print(car.market.getCountries().get(j).getCountryName() + " - ");
+                    System.out.println(car.market.getCountries().get(j).getCountrySign());
+                }
             }
         }
     }
